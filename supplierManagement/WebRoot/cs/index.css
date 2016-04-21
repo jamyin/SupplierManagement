@@ -1,0 +1,78 @@
+v\:*{behavior: url(#default#VML);}
+.top {
+	position:absolute;
+	right:20%;
+	top:0;
+}
+.user_1{
+	position:absolute;
+	left:0%;
+	top:0px;
+	height:20px;
+	width:209px;
+	color:#006000;
+	padding:8px; 
+ 	background-color: #F0F0F0;
+}
+.user_2{
+	position:absolute;
+	left:2%;
+	top:40px;
+	height:25px;
+	width:210px;
+	padding:8px; 
+}
+.user_3{
+	position:absolute;
+	left:0%;
+	top:140px;
+	height:89px;
+	width:209px;
+	padding:8px; 
+ 	background-color:#F0F0F0;
+}
+.user_4{
+	position:absolute;
+	left:0%;
+	top:0px;
+	height:20px;
+	width:468px;
+	color:#006000;
+	padding:8px; 
+ 	background-color: #F0F0F0;
+}
+.user_5{
+	position:absolute;
+	right: 0%;
+	top:0px;
+	height:20px;
+	width:234px;
+	color:#FFFFFF;
+	padding:8px; 
+ 	background-color: #006000;
+}
+.user_img_1{
+	 width:60px; 
+	 height:25px;
+	  background:url(../images/submit.png) no-repeat; 
+	  border:none;
+}
+.user_img_2{
+	 width:60px; 
+	 height:25px;
+	  background:url(../images/regist.jpg) no-repeat; 
+	  border:none;
+}
+.hr_begin{
+	position:absolute;
+	top:999px;
+}
+.user_begin{
+	position:absolute;
+	right:18%;
+	top:1010px;
+	width:1000px;
+	height:50px;
+	padding:12px; 
+	background-color: #F0F0F0;
+}

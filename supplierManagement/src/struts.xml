@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <!-- Add packages here -->
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+     <!-- 验证码操作Action配置 -->
+    <package name="default" namespace="/"  extends="struts-default">
+    	 <!-- 定义全局结果 -->
+    	<global-results>
+      		<result name="login" type="redirect">login.jsp</result>
+    	</global-results> 
+    	
+    	<!-- 图片上传 -->
+		<action name="ImgUpload" class="com.project.action.ImgUploadAction" method="imgUpload">
+		</action>
+    	<!-- <action name="login" class="loginaction" method="login">
+    		   <result name="success" >main.jsp</result>
+    		   <result name="input" >login.jsp</result>
+    	</action> -->
+    
+    	<action name="login" class="loginaction" method="login">
+    		   <result name="success" >main.jsp</result>
+    		   <result name="input" >login.jsp</result>
+    	</action>
+    	<!-- 所有表格的操作 ，对应GoodsAction-->
+    	<action name="allTable" class="theGoodsAction" method="getAllTable">
+    		<!-- <result name="success">newSupplier.jsp</result> -->
+    		<!-- <result name="success">systemCore.jsp</result> -->
+    		<result name="success">treeFour.jsp</result>
+    		<result name="input">login.jsp</result>
+    	</action>
+    	<!-- 用户-->
+    	<action name="allWholeUser" class="theUserAction" method="wholeUser">
+    		<result name="success">userList.jsp</result>
+    		<result name="input" type="redirect">userAction.action</result>
+    	</action>
+    	<action name="userAction" class="theUserAction" method="allUser">
+    		<result name="success">userList.jsp</result>
+    		<result name="input" type="redirect">userAction.action</result>
+    	</action>
+		<action name="addUser" class="theUserAction" method="addUser">
+			<result name="success">userList.jsp</result>
+			<result name="input">userList.jsp</result>
+		</action>
+		<action name="clickUpdateUser" class="theUserAction" method="clickUpdateUser">
+			<result name="success">updateUser.jsp</result>
+			<result name="input">updateUser.jsp</result>
+		</action>
+		<action name="updateUser" class="theUserAction" method="updateUser">
+			<result name="success" type="redirect">userAction.action </result>
+			<result name="input"> updateUser.jsp</result>
+		</action>
+		<action name="detailUser" class="theUserAction" method="clickUpdateUser">
+			<result name="success">detailUser.jsp</result>
+			<result name="input">detailUser.jsp</result>
+		</action>
+		<!-- 拉黑 -->
+		<action name="updateFileUser" class="theUserAction" method="updateFileUser">
+			<result type="redirect" name="success">userAction</result>
+			<result type="redirect" name="input">userAction</result>
+		</action>
+		<action name="deleteAction" class="theUserAction" method="deleteUser">
+			<result type="redirect" name="success">userAction</result>
+			<result type="redirect" name="input">userAction</result>
+		</action>
+		<action name="userIdAction" class="theUserAction" method="findListById">
+			<result name="success">userList.jsp</result>
+			<result name="input">userList.jsp</result>
+		</action>
+		<action name="userNameAction" class="theUserAction" method="findByName">
+			<result name="success">userList.jsp</result>
+			<result name="input">userList.jsp</result>
+		</action>
+		<action name="register" class="theUserAction" method="addUser">
+			<result name="success">registerSuccess.jsp</result>
+			<result name="input">register.jsp</result>
+		</action>
+		<action name="findPassword" class="theUserAction" method="findPassword">
+			<result name="success">updatePassword.jsp</result>
+			<result name="input">updatePassword.jsp</result>
+		</action>
+		<action name="getAllPage" class="theUserAction" method="getAllPage">
+			<result type="redirect" name="success">userAction.action</result>
+			<result type="redirect" name="input">userAction.action</result>
+		</action>
+		<action name="getPaging" class="theUserAction" method="thePage">
+			<result  name="success">userList.jsp</result>
+			<result name="input">userList.jsp</result>
+		</action>
+		<!-- 用户报表 -->
+		<action name="reportaccountepdf" class="com.project.action.ReportAction" method="reportPdf">
+			<result type="redirectAction">report</result>
+		</action>
+		<action name="reportaccounteexcel" class="com.project.action.ReportAction" method="reportexcel">
+		<result type="redirectAction">report</result>
+		</action>
+		<action name="userDown" class="theUserAction" method="allUser">
+			<result name="success">userDown.jsp</result>
+		</action>
+		<action name="userAllDown" class="theUserAction" method="wholeUser">
+			<result name="success">userDown.jsp</result>
+		</action>
+		<!-- 退出 -->
+		<action name="exit"  class="loginaction"  method="exitSystem">
+		    <result name="success">/login.jsp</result>
+		</action>
+		<action name="report" class="loginaction" method="report">
+		    <result name="success">userList.jsp</result>
+		     <result name="input">userList.jsp</result>
+		</action>
+		<!-- 产品 -->
+		<action name="goodsAction" class="theGoodsAction" method="allGoods">
+			<result name="success">goodsList.jsp</result>
+			<result name="input" >goodsList.jsp</result>
+		</action>
+		<action name="clickAddGoods" class="theGoodsAction" method="clickAddGoods">
+			<result name="success">addGoods.jsp</result>
+			<result name="input">addGoods.jsp</result>
+		</action>
+		<action name="addGoods" class="theGoodsAction" method="addGoods">
+			<result type="redirect" name="success" >goodsAction</result>
+			<result type="redirect" name="input" >goodsAction</result>
+		</action>
+		<action name="deleteGoods" class="theGoodsAction" method="deleteGoods">
+			<result type="redirect" name="success" >goodsAction.action</result>
+			<result type="redirect" name="input">goodsAction.action</result>
+		</action>
+		<action name="updateGoods" class="theGoodsAction" method="findById">
+			<result name="success" >updateGoods.jsp</result>
+			<result name="input" >updateGoods.jsp</result>
+		</action>
+		<action name="notShowGoods" class="theGoodsAction" method="notShowGoods">
+			<result type="redirect" name="success" >goodsAction.action</result>
+			<result type="redirect" name="input" >goodsAction.action</result>
+		</action>
+		<action name="updateNewGoods" class="theGoodsAction" method="updateGoods">
+			<result type="redirect" name="success">goodsAction.action</result>
+			<result type="redirect" name="input">goodsAction.action</result>
+		</action>
+		<action name="detailGoods" class="theGoodsAction" method="findById">
+			<result name="success">detailGoods.jsp</result>
+			<result name="input">detailGoods.jsp</result>
+		</action>
+		<action name="productById" class="theGoodsAction" method="findListById">
+			<result name="success">goodsList.jsp</result>
+			<result name="input">goodsList.jsp</result>
+		</action>
+		<action name="productByName" class="theGoodsAction" method="findByName">
+			<result name="success">goodsList.jsp</result>
+			<result name="input">goodsList.jsp</result>
+		</action>
+		<action name="findProductByName" class="theGoodsAction" method="findProductByName">
+			<result name="success">goodsList.jsp</result>
+		</action>
+		<action name="goodsNameAction" class="theGoodsAction" method="">
+			<result name="success">goodsList.jsp</result>
+		</action>
+		<action name="goodsBySupplierName" class="theGoodsAction" method="findBySupplierName">
+			<result name="success">goodsList.jsp</result>
+		</action>
+		<action name="findProductBySupplier" class="theGoodsAction" method="findBySupplierName">
+			<result name="success">goodsList.jsp</result>
+		</action>
+		<!-- 下载信息 -->
+		<action name="goodsDown" class="theGoodsAction" method="allGoods">
+			<result name="success">goodsDown.jsp</result>
+			<result name="input">goodsDown.jsp</result>
+		</action>
+		<action name="goodsAllDown" class="theGoodsAction" method="wholeGoods">
+			<result name="success">goodsDown.jsp</result>
+			<result name="input">goodsDown.jsp</result>
+		</action>
+		
+		<!-- 通过供应商查询食品 -->
+		<action name="goodsIdAction" class="theGoodAction" method="">
+			<result></result>
+		</action>
+		<!-- <action name="findAllAction" class="supplierAction" method="findAllSupplier">
+			<result name="success">goodsList.jsp</result>
+			<result name="input">goodsList.jsp</result>
+		</action> -->
+		<action name="findSupplierAction" class="supplierAction" method="findAllSupplier">
+			<result name="success">supplier.jsp</result>
+			<result name="input">supplier.jsp</result>
+		</action>
+		
+		<!-- 合同 -->
+		<action name="allContract" class="TheContractAction" method="allContract">
+			<result name="success">contract.jsp</result>
+			<result name="input">contract.jsp</result>
+		</action>
+		<action name="clickAddContract" class="TheContractAction" method="clickAddContract">
+			<result name="success">addContract.jsp</result>
+			<result name="input">addContract.jsp</result>
+		</action>
+		<action name="addContract" class="TheContractAction" method="add">
+			<result type="redirect" name="success">allContract.action</result>
+			<result type="redirect" name="input">allContract.action</result>
+		</action>
+		<action name="deleteContract" class="TheContractAction" method="delete">
+			<result type="redirect" name="success">allContract.action</result>
+			<result type="redirect" name="input">allContract.action</result>
+		</action>
+		<action name="notShowContract" class="TheContractAction" method="notShowContract">
+			<result type="redirect" name="success">allContract.action</result>
+			<result type="redirect" name="input">allContract.action</result>
+		</action>
+		<action name="updateContract" class="TheContractAction" method="update">
+			<result name="success">updateContract.jsp</result>
+			<result name="input">updateContract.jsp</result>
+		</action>
+		<action name="checkContract" class="TheContractAction" method="update">
+			<result name="success">checkContract.jsp</result>
+		</action>
+		<!-- <action name="checkContract" class="TheContractAction" method="update">
+			<result name="success">checkContract.jsp</result>
+			<result name="input">checkContract.jsp</result>
+		</action> -->
+		<action name="detailContract" class="TheContractAction" method="update">
+			<result name="success">detailContract.jsp</result>
+			<result name="input">detailContract.jsp</result>
+		</action>
+		<action name="newContract" class="TheContractAction" method="update">
+			<result name="success">contractDetail.jsp</result>
+			<result name="input">contractDetail.jsp</result>
+		</action>
+		<action name="updateNewContract" class="TheContractAction" method="updateNewContract">
+			<result type="redirect" name="success">allContract.action</result>
+			<result type="redirect" name="input">allContract.action</result>
+		</action>
+		<action name="detailsContract" class="TheContractAction" method="update">
+			<result name="success">newContract.jsp</result>
+			<result name="input">newContract.jsp</result>
+		</action>
+		<action name="contractById" class="TheContractAction" method="findListById">
+			<result name="success">contract.jsp</result>
+			<result name="input" type="redirect">allContract.action</result>
+		</action>
+		<action name="contractByName" class="TheContractAction" method="findByName">
+			<result name="success">contract.jsp</result>
+			<result name="input">contract.jsp</result>
+		</action>
+		<!-- 通过供应商查询 -->
+		<action name="findContractBySupplier" class="TheContractAction" method="findBySupplier">
+			<result name="success">contract.jsp</result>
+		</action>
+		<!--jam  按姓名查询合同 (从供应商列表查相关连的合同) -->
+		<action name="findContractByName" class="TheContractAction" method="findContractByName">
+			<result name="success">contract.jsp</result>
+		</action>
+		<!-- 下载合同 -->
+		<action name="contractDown" class="TheContractAction" method="allContract">
+			<result name="success">contractDown.jsp</result>
+		</action>
+		<action name="contractAllDown" class="TheContractAction" method="wholeContract">
+			<result name="success">contractDown.jsp</result>
+		</action>
+		
+		<!-- 供应商 -->
+		<action name="findSupplier"  class="supplierAction"  method="findAllSupplier">
+    		   <result name="success" >addGoods.jsp</result>
+    		   <result name="input" >login.jsp</result>
+		</action>
+		<action name="getSupplierList" class="supplierAction" method="findAllSupplier">
+			<result name="success">suppList.jsp</result>
+			<result name="input">suppList.jsp</result>
+		</action>
+		
+		<action name="exitAction" class="loginaction" method="exit">
+			<result name="success">login.jsp</result>
+		</action>
+        <!-- Random验证码 -->
+		<action name="random" class="randomAction">
+			<result type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="exitSystem"  class="loginaction"  method="exitSystem">
+		    <result name="success">login.jsp</result>
+		</action>
+		<action name="report" class="loginaction" method="report">
+		    <result>/pages/report.jsp</result>
+		     <result name="input">/pages/report.jsp</result>
+		</action>
+		<!-- 供应商信息下载 -->
+		<action name="supplierDown" class="supplierAction" method="findAllSupplier">
+			<result name="success">supplierDown.jsp</result>
+		</action>
+		<action name="supplierAllDown" class="supplierAction" method="findWholeSupplier">
+			<result name="success">supplierDown.jsp</result>
+		</action>
+		
+		<!-- 供应商类型查询 -->
+		<action name="findSupplierByBigSort" class="supplierAction" method="findSupplierByBigSort">
+			<result name="success">suppList.jsp</result>
+			<result name="input">login.jsp</result>
+		</action>
+		<action name="findSupplierBySort" class="supplierAction" method="findSupplierBySort">
+			<result name="success">suppList.jsp</result>
+			<result name="input">login.jsp</result>
+		</action>
+		<action name="getContacterList" class="contacterAction" method="getPageList">
+			<result name="success">contacterList.jsp</result>
+			<result name="input">contacterList.jsp</result>
+		</action>
+		<!-- 联系人下载 -->
+		<action name="contacterDown" class="contacterAction" method="getPageList">
+			<result name="success">contacterDown.jsp</result>
+		</action>
+		<action name="contacterAllDown" class="contacterAction" method="findWholeContacter">
+			<result name="success">contacterDown.jsp</result>
+		</action>
+		
+		<!-- 对树节点的操作 -->
+		<action name="addTypeNode" class="theTypeAction" method="addNode">
+			<result name="success">treeFour.jsp</result>
+		</action>
+		
+		<!-- ****************************jam**************************** -->
+		<!-- 查询所有供应商 -->
+		<action name="findAllSupplier"  class="supplierAction"  method="findAllSupplier">
+    		   <result name="success" >suppList.jsp</result>
+    		   <result name="input" >login.jsp</result>
+		</action>
+		<!-- 查询所有供应商(包括子表信息) -->
+		<action name="findAllSupplier6"  class="supplierAction"  method="findAllSupplier6">
+    		   <result name="success" >supplier6List.jsp</result>
+    		   <result name="input" >login.jsp</result>
+		</action>
+		<!-- 修改供应商 -->
+		<action name="findSupplierByID"  class="supplierAction"  method="findSupplierByID">
+		    <result name="success">updateSupp.jsp</result>
+		</action>
+		<!-- 审核供应商 -->
+		<action name="auditSupplier"  class="supplierAction"  method="findSupplierByID">
+		    <result name="success">auditSupp.jsp</result>
+		</action>
+		<!-- 查询供应商详细信息  -->
+		<action name="findSupplierDetaile"  class="supplierAction"  method="findSupplierByID">
+		    <result name="success">supplierDetaileList.jsp</result>
+		</action>
+		<!-- 按姓名和专长查询供应商 -->
+		<action name="findSupplierByField"  class="supplierAction"  method="findSupplierByField">
+		    <result name="success">suppList.jsp</result>
+		</action>	
+		<!-- 按供应商姓名查询ID（添加联系人时使用） -->
+	    <!--<action name="findSuppIdByName"  class="supplierAction"  method="findSuppIdByName">
+		<result name="success">
+		<param name="root">supplier</param>
+		</result>
+		</action>	 -->
+	   <!--  <action name="findSuppIdByName" class="supplierAction" method="findSuppIdByName">
+            <result name="success"><param name="root">supplierID</param></result>
+        </action>  -->
+		
+		<!-- 增加供应商 -->
+		<action name="addSupplier"  class="supplierAction"  method="addSupplier">
+		    <result name="success" type="redirectAction">findAllSupplier.action</result>
+		    <result name="input">addSupplier1.jsp</result>		
+		</action>
+		<!-- 增加供应商(子表一起加) -->
+		<action name="addSupplier6"  class="supplierAction"  method="addSupplier6">
+		    <result name="success" type="redirectAction">findAllSupplier.action</result>
+		    <result name="input">addSupplier6.jsp</result>		
+		</action>
+		<!-- 删除供应商 -->
+		<action name="deleteSupplier"  class="supplierAction"  method="deleteSupplier">
+		    <result name="success" type="redirectAction">findAllSupplier.action</result>
+		</action>
+		<!-- 修改供应商 -->
+		<action name="updateSupplier"  class="supplierAction"  method="updateSupplier">
+		    <result name="success" type="redirectAction">findAllSupplier.action </result>
+			<result name="input" type="redirectAction">findAllSupplier.action </result>
+		</action>
+		<!-- 查询所有信息（4张表） -->
+		<action name="findAllContent"  class="supplierAction"  method="findAllContent">
+		    <result name="success" type="redirectAction">findAllSupplier.action</result>
+		</action>
+		<!-- 查询过期供应商 -->
+		<action name="findOverSuppList" class="supplierAction" method="findOverSuppList">
+			<result name="success">overSuppList.jsp</result>
+		</action>
+		<!-- 查询过期供应商(加条件一起查) -->
+		<action name="findOverSuppByField" class="supplierAction" method="findOverSuppByField">
+			<result name="success">overSuppList.jsp</result>
+		</action>
+		
+		<!-- 查询所有联系人 -->
+		<action name="findAllContacter"  class="contacterAction"  method="findAllContacter">
+    		   <result name="success" >contacterList.jsp</result>
+    		   <result name="input" >login.jsp</result>
+		</action>
+		<!-- 按ID查询联系人  -->
+		<action name="findcontacterByID"  class="contacterAction"  method="findcontacterByID">
+		    <result name="success">updateContacter.jsp</result>
+		</action>
+		<!-- 查询联系人详细信息  -->
+		<action name="findcontacterDetaile"  class="contacterAction"  method="findcontacterByID">
+		    <result name="success">contacterDetaileList.jsp</result>
+		</action>
+		<!-- 按姓名查询联系人 (从供应商列表查相关连的联系人) -->
+		<action name="findContacterByName1"  class="contacterAction"  method="findContacterByName1">
+		    <result name="success">contacterList.jsp</result>
+		</action>
+		<!-- 按姓名查询联系人  -->
+		<action name="findContacterByName"  class="contacterAction"  method="findContacterByName">
+		    <result name="success">contacterList.jsp</result>
+		</action>
+		<!-- 增加联系人 -->
+		<action name="addContacter"  class="contacterAction"  method="addContacter">
+		    <result name="success" type="redirectAction">getContacterList.action</result>
+		    <result name="input">addLinkman.jsp</result>		
+		</action>
+		<!-- 增加联系人查到相应供应商-->
+		<action name="addLinkman"  class="contacterAction"  method="addLinkman">
+		    <result name="success">addLinkman.jsp</result>
+		    <result name="input">addLinkman.jsp</result>		
+		</action>
+		<!-- 删除联系人  -->
+		<action name="deleteContacter"  class="contacterAction"  method="deleteContacter">
+		    <result name="success" type="redirectAction">getContacterList.action</result>
+		</action>
+		<!-- 修改联系人  -->
+		<action name="updateContacter"  class="contacterAction"  method="updateContacter">
+		    <result name="success" type="redirectAction">getContacterList.action </result>
+			<result name="input">contacterList.jsp</result>
+		</action>
+		
+		<!-- 文件的上传-->
+	    <action name="fileUpload"  class="com.project.action.FileUploadAction">
+		<result name="success">addContract.jsp</result>
+	    <result name="input">addContract.jsp</result>
+		</action>
+		
+		<!-- 文件的下载 -->
+	    <action name="fileDownload"  class="com.project.action.FileDownloadAction">
+		<result name="success" type="stream">
+		<!-- <param name="contentDisposition">attachment;filename=${fileName}</param> -->
+        <param name="inputName">downloadFile</param>
+        <param name="bufferSize">5120</param>
+		</result>
+		</action>
+		
+		<!-- ****************************jam**************************** -->
+		
+		
+    </package>
+    <package name="json" namespace="/"  extends="json-default">
+		<action name="modifypwd" class="loginaction" method="updatePass">
+			<result type="json">
+			<param name="includeProperties">errorMessage</param>
+			</result>
+		</action>
+		<action name="searchuser" class="loginaction" method="serchUser">
+			<result type="json">
+			<param name="includeProperties">userlist</param>
+			</result>
+		</action>
+		
+		<!-- 按供应商姓名查询ID（添加联系人时使用） -->
+		<!-- <action name="findSuppIdByName"  class="supplierAction"  method="findSuppIdByName">
+		 <result type="json"></result>
+		</action> -->
+		
+	    <action name="findSuppIdByName" class="supplierAction" method="findSuppIdByName">
+            <result type="json">
+            <param name="root">result</param>
+            </result>
+        </action>
+		
+    </package>
+	<!-- <include file="struts-he.xml"></include> -->
+	
+    <!-- UI主题更改为简单模式 -->
+	    <constant name="struts.ui.theme" value="simple"/> 
+	    <constant name="struts.devMode" value="true"/>
+	    <constant name="struts.i18n.encoding" value="UTF-8"/>   
+	    <constant name="struts.allowed.action.names"  value="[a-zA-Z0-9._!/\-]*"  />
+</struts>

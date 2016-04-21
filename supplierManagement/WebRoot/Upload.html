@@ -1,0 +1,47 @@
+<html>  
+<head>  
+<title>文件上传</title>  
+<script type="text/javascript" src="kindeditor-4.1.10/jquery-1.8.0.min.js"></script>
+<script type="text/javascript">
+function chuanzhi() {
+//alert("圣诞快乐");
+var path=document.getElementById("file").value;
+//alert("path="+path);
+var fullName=path.split("\\");// 将 \ 转义
+//alert("fullName="+fullName);
+var filename=fullName[fullName.length-1];
+//alert("filename="+filename);
+window.opener.document.getElementById("attachment").value =filename;
+//alert(window.opener.document.getElementById("attachment").value);
+document.uploadForm.submit();
+window.close();
+//window.opener.document.getElementById("attachment").value =document.getElementById("file").value;
+//alert(window.opener.document.getElementById("attachment").value);
+//window.close();
+}
+
+/* $("#uploadForm").submit(function(){
+alert("空你急哇");  //怎么没执行？
+    window.close();
+});  */
+</script>
+</head>  
+<body style="text-align: center" onunload="window.close()">  
+  <form name="uploadForm" id="uploadForm" method="POST"  
+    enctype="MULTIPART/FORM-DATA"  
+    action="fileUpload" onsubmit="chuanzhi()"> 
+    <table cellpadding="1" border="1" cellspacing="1"> 
+      <tr align="center"> 
+       <td><div align="right">请选择:</div></td>  
+       <td><input type="file" name="file" id="file" size="30"/> </td>  
+      </tr>  
+      <tr align="center">
+        <td colspan="2">
+        <input type="submit" name="submit" value="上传"/> 
+        <input type="reset" name="reset" value="重置"/>
+        <!-- <input class="input-button" type="button" value="返回" onclick="javascript:history.go(-1)"/></td>   -->
+      </tr>  
+    </table>  
+ </form>  
+</body>  
+</html> 

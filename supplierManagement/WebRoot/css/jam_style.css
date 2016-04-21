@@ -1,0 +1,8 @@
+body { font:12px 宋体; background:#fff; }
+body,ul,li,p,form,dl,dt,dd,input { margin:0; padding:0; }
+ul { list-style:none; }
+img { border:0; }
+table { border-collapse:collapse;font-size:medium;border-color:"#000000"}
+td{font-size: 12px;}
+
+/* .pastDue{color: red;} */

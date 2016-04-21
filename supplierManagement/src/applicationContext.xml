@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+    <context:annotation-config></context:annotation-config>
+    <context:component-scan base-package="com.project.dao.impl">
+    </context:component-scan>
+	<!-- 支持元注释 -->  
+    <context:annotation-config />  
+    <!-- 扫描包目录 -->  
+    <context:component-scan base-package="com"></context:component-scan>  
+    <bean id="sessionFactory"  
+        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">  
+        <property name="configLocation" value="classpath:hibernate.cfg.xml">  
+        </property>  
+    </bean>  
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">  
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>  
+    </bean>  
+	 
+	<!-- dao层 -->
+	   <bean id="loginupwdDapImpl" class="com.project.dao.impl.LoginUpwdDaoImpl"></bean>
+	   <bean id="userDao" class="com.project.dao.impl.UserDaoImpl"></bean>
+	   <bean id="contractDao" class="com.project.dao.impl.ContractDaoImpl"></bean>
+	   <bean id="goodsDao" class="com.project.dao.impl.GoodsDaoImpl"></bean>
+	   <bean id="typeDao" class="com.project.dao.impl.TypeDaoImpl"></bean>
+	   <bean id="logtableDao" class="com.project.dao.impl.LogtableDaoImpl"></bean>
+	   <bean id="moodDao" class="com.project.dao.impl.MoodDaoImpl"></bean>
+	<!-- service层 -->
+	 <bean id="loginUpwdServiceImpl"  class="com.project.service.impl.LoginUpwdServiceImpl">
+	     <property name="loginUpwdDao" ref="loginupwdDapImpl"></property>
+	 </bean>
+	 <bean id="userService" class="com.project.service.impl.UserServiceImpl">
+	 	<property name="userDao" ref="userDao"></property>
+	 </bean>
+	 
+	 <bean id="goodsService" class="com.project.service.impl.GoodsServiceImpl">
+	 	<property name="goodsDao" ref="goodsDao"></property>
+	 </bean>
+	 
+	 <bean id="contractService" class="com.project.service.impl.ContractServiceImpl">
+	 	<property name="contractDao" ref="contractDao"></property>
+	 </bean>
+	 <bean id="typeService" class="com.project.service.impl.TypeServiceImpl">
+	 	<property name="typeDao" ref="typeDao"></property>
+	 </bean>
+	 
+	 <bean id="logtableService" class="com.project.service.impl.LogtableServiceImpl">
+	 	<property name="logtableDao" ref="logtableDao"></property>
+	 </bean>
+	 
+	 <bean id="moodService" class="com.project.service.impl.MoodServiceImpl">
+	 	<property name="moodDao" ref="moodDao"></property>
+	 </bean>
+	<!-- action层 -->
+	<bean id="randomAction" class="com.project.action.RandomAction" scope="prototype"></bean>
+	<bean id="loginaction"  class="com.project.action.LoginAction"  scope="prototype">
+	    <property name="loginUpwdService" ref="loginUpwdServiceImpl"></property>
+	</bean>
+	<bean id="theUserAction" class="com.project.action.UserAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	<bean id="theTypeAction" class="com.project.action.TypeAction" scope="prototype">
+		<property name="typeService" ref="typeService"></property>
+	</bean>
+	<bean id="theGoodsAction" class="com.project.action.GoodsAction" scope="prototype">
+		<!-- 产品 -->
+		<property name="goodsService" ref="goodsService"></property>
+		<!-- 供应商 -->
+		<property name="supplierService" ref="supplierService"></property>
+		<!-- 合同 -->
+		<property name="contractService" ref="contractService"></property>
+		<!-- 联系人 -->
+		<property name="contacterService" ref="contacterService"></property>
+		<!-- 用户 -->
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	<bean id="TheContractAction" class="com.project.action.ContractAction" scope="prototype">
+		<property name="contractService" ref="contractService"></property>
+		<property name="supplierService" ref="supplierService"></property>
+	</bean>
+	
+	<bean id="theLogtableAction" class="com.project.action.LogtableAction" scope="prototype">
+		<property name="logtableService" ref="logtableService"></property>
+	</bean>
+	
+	<bean id="theMoodAction" class="com.project.action.MoodAction" scope="prototype">
+		<property name="moodService" ref="moodService"></property>
+	</bean>
+	<!-- =====================================jam============================================ -->
+	<!-- dao层 -->
+	<bean id="supplierDao" class="com.project.dao.impl.SupplierDaoImpl">
+			<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	<bean id="contacterDao" class="com.project.dao.impl.ContacterDaoImpl">
+				<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	   
+	<!-- service层 -->
+	 <bean id="supplierService" class="com.project.service.impl.SupplierServiceImpl">
+	 	<property name="supplierDao" ref="supplierDao"></property>
+	 </bean>
+	 <bean id="contacterService" class="com.project.service.impl.ContacterServiceImpl">
+	 	<property name="contacterDao" ref="contacterDao"></property>
+	 </bean>
+	<!-- action层 -->
+	<bean id="supplierAction" class="com.project.action.SuppAction" scope="prototype">
+		<property name="supplierService" ref="supplierService"></property>
+		<property name="supplierDao" ref="supplierDao"></property>
+	</bean>
+
+	<bean id="contacterAction" class="com.project.action.ContacterAction" scope="prototype">
+		<property name="contacterService" ref="contacterService"></property>
+		<property name="supplierService" ref="supplierService"></property>
+	</bean>
+
+	<!-- =====================================jam============================================ -->
+	
+ </beans>
